@@ -3,9 +3,7 @@
 </template>
 
 <script>
-  export default {
-    name: 'Order'
-  }
+    export default {}
 </script>
 
 <style scoped lang="stylus" rel="stylesheet/stylus">
