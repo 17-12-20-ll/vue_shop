@@ -1,18 +1,19 @@
 <template>
   <div id="app">
     <router-view></router-view>
-    <FooterGuide></FooterGuide>
+    <!--route表示当前路由，所以可以获取当前路由的元数据并且进行权限控制，是否显示等判断-->
+    <FooterGuide v-show="$route.meta.showFooter"/>
   </div>
 </template>
 
 <script>
-    import FooterGuide from './components/FooterGuide/FooterGuide'
+  import FooterGuide from './components/FooterGuide/FooterGuide'
 
-    export default {
-        components: {
-            FooterGuide
-        }
+  export default {
+    components: {
+      FooterGuide
     }
+  }
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus" scoped>

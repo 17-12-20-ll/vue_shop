@@ -1,6 +1,7 @@
 $green = #02a774;
 $yellow = #F5A100;
 $bc = #e4e4e4;
+
 // 一像素下边框
 bottom-border-1px($color)
   position relative
@@ -15,7 +16,7 @@ bottom-border-1px($color)
     background-color $color
     transform scaleY(0.5)
 
-//一像素上边框
+// 一像素上边框
 top-border-1px($color)
   position relative
   &::before
@@ -39,14 +40,16 @@ top-border-1px($color)
     &::before
       transform scaleY(.333333)
 
-//根据像素比来使用2x图3x图
+//根据像素比来使用 2x图 3x图
 bg-image($url)
   background-image: url($url + "@2x.png")
   @media (-webkit-min-device-pixel-ratio: 3),(min-device-pixel-ratio: 3)
     background-image: url($url + "@3x.png")
 
-// 清除浮动
+//清除浮动
 clearFix()
   *zoom 1
   &::after
-    content '' display block clear both
+    content ''
+    display block
+    clear both
