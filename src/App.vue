@@ -7,9 +7,39 @@
 </template>
 
 <script>
+  import {mapActions} from 'vuex'
   import FooterGuide from './components/FooterGuide/FooterGuide'
 
   export default {
+    mounted () {
+      /*let m_this = this
+      AMap.plugin('AMap.Geolocation', function () {
+        var geolocation = new AMap.Geolocation({
+          // 是否使用高精度定位，默认：true
+          enableHighAccuracy: true,
+          // 设置定位超时时间，默认：无穷大
+          timeout: 10000,
+        })
+        geolocation.getCurrentPosition()
+        AMap.event.addListener(geolocation, 'complete', onComplete)
+
+        function onComplete (data) {
+          // data是具体的定位信息
+          console.log('定位成功信息：', data)
+          let lat = data.position.lat
+          let lng = data.position.lng
+          console.log(lat, lng)
+          m_this.$store.commit('receive_position', {lng, lat})
+        }
+      })
+      // this.$store.commit('receive_position', {})*/
+      // this.$store.dispatch('actionGetAddress')
+      this.actionGetAddress()
+    },
+    methods: {
+      ...mapActions(['actionGetAddress'])
+    }
+    ,
     components: {
       FooterGuide
     }
