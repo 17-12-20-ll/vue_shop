@@ -5,9 +5,9 @@
 * */
 import axios from 'axios'
 
-export default function ajax (url = '', data = {}, type = 'GET') {
+export default function ajax(url = '', data = {}, type = 'GET') {
   return new Promise(function (resolve, reject) {
-    //执行异步ajax请求
+      //执行异步ajax请求
       let promise
       if (type === 'GET') { // 准 备 url query 参 数 数 据
         let dataStr = '' // 数 据 拼 接 字 符 串

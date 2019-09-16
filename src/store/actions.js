@@ -5,7 +5,8 @@
 import {
   RECEIVE_ADDRESS,
   RECEIVE_CATEGORY,
-  RECEIVE_SHOPS
+  RECEIVE_SHOPS,
+  RECEIVE_USER_INFO
 } from './mutation-types'
 import {
   getAddress,
@@ -15,7 +16,7 @@ import {
 
 export default {
   //异步获取地址
-  async actionGetAddress ({commit, state}) {
+  async actionGetAddress({commit, state}) {
     console.log(state, 'aaa')
     //发送异步ajax请求
     const geohash = state.latitude + ',' + state.longitude
@@ -27,7 +28,7 @@ export default {
     }
   },
   //异步获取食品分类列表
-  async actionGetCategory ({commit}) {
+  async actionGetCategory({commit}) {
     //发送异步ajax请求
     const result = await getFoodCategory()
     //根据结果通过mutation修改state的值
@@ -37,7 +38,7 @@ export default {
     }
   },
   //异步获取商家列表
-  async actionGetShops ({commit, state}) {
+  async actionGetShops({commit, state}) {
     console.log(state, 'lalallalalla')
     //发送异步ajax请求
     const {longitude, latitude} = state
@@ -47,5 +48,10 @@ export default {
       const shops = result.data
       commit(RECEIVE_SHOPS, {shops})
     }
+  },
+
+  // 同步记录用户信息
+  recordUser({commit}, userInfo) {
+    commit(RECEIVE_USER_INFO, {userInfo})
   }
 }
