@@ -2,12 +2,17 @@
   <section class="msite">
     <!--首页头部-->
     <HeaderTop :title="address.name">
-      <span class="header_search" slot="left">
+      <router-link class="header_search" slot="left" to="/search">
         <i class="iconfont iconsousuo"></i>
-      </span>
-      <span class="header_login" slot="right">
-        <span class="header_login_text">登录|注册</span>
-      </span>
+      </router-link>
+      <router-link class="header_login" slot="right" :to="userInfo._id ? '/userInfo':'/login'">
+        <span class="header_login_text" v-if="!userInfo._id">
+          登录|注册
+        </span>
+        <span class="header_login_text" v-else>
+          <i class="iconfont iconwode"></i>
+        </span>
+      </router-link>
     </HeaderTop>
     <!--首页导航-->
     <nav class="msite_nav">
@@ -63,7 +68,7 @@
             ShopList
         },
         computed: {
-            ...mapState(['address', 'category']),
+            ...mapState(['address', 'category', 'userInfo']),
             /*
             根据category一维数组得到一个二维数组，用于遍历两轮,小数组的元素个数最大是8个
              */

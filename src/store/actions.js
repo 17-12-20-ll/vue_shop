@@ -6,12 +6,15 @@ import {
   RECEIVE_ADDRESS,
   RECEIVE_CATEGORY,
   RECEIVE_SHOPS,
-  RECEIVE_USER_INFO
+  RECEIVE_USER_INFO,
+  REST_USER_INFO
 } from './mutation-types'
 import {
   getAddress,
   getFoodCategory,
-  getShopList
+  getShopList,
+  getUserInfo,
+  getLogout
 } from '../api'
 
 export default {
@@ -53,5 +56,21 @@ export default {
   // 同步记录用户信息
   recordUser({commit}, userInfo) {
     commit(RECEIVE_USER_INFO, {userInfo})
+  },
+
+  // 异步获取用户信息
+  async actionUserInfo({commit}) {
+    const result = await getUserInfo()
+    if (result.code === 0) {
+      const userInfo = result.data
+      commit(RECEIVE_USER_INFO, {userInfo})
+    }
+  },
+  // 异步登出
+  async actionLogout({commit}){
+    const result = await getLogout()
+    if (result.code === 0) {
+      commit(REST_USER_INFO)
+    }
   }
 }
