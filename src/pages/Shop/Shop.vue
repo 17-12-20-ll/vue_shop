@@ -17,13 +17,17 @@
 </template>
 
 <script>
-    import ShopHeader from "../../components/ShopHeader/ShopHeader";
+  import ShopHeader from '../../components/ShopHeader/ShopHeader'
 
-    export default {
-        components: {
-            ShopHeader
-        }
+  export default {
+    components: {
+      ShopHeader
+    },
+    mounted () {
+      this.$store.dispatch('actionShopGoods')
+      this.$store.dispatch('actionShopInfo')
     }
+  }
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">

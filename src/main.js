@@ -9,6 +9,8 @@ import App from './App'
 import router from './router'
 import store from './store'
 
+import './mock/mockServer'  // 执行一次mock数据接口
+
 // 注册全局组件标签
 Vue.component(Button.name, Button) // <mt-button>
 

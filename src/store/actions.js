@@ -7,19 +7,25 @@ import {
   RECEIVE_CATEGORY,
   RECEIVE_SHOPS,
   RECEIVE_USER_INFO,
-  REST_USER_INFO
+  REST_USER_INFO,
+  RECEIVE_GOODS,
+  RECEIVE_RATINGS,
+  RECEIVE_INFO,
 } from './mutation-types'
 import {
   getAddress,
   getFoodCategory,
   getShopList,
   getUserInfo,
-  getLogout
+  getLogout,
+  getShopGoods,
+  getShopInfo,
+  getShopRatings
 } from '../api'
 
 export default {
   //异步获取地址
-  async actionGetAddress({commit, state}) {
+  async actionGetAddress ({commit, state}) {
     console.log(state, 'aaa')
     //发送异步ajax请求
     const geohash = state.latitude + ',' + state.longitude
@@ -31,7 +37,7 @@ export default {
     }
   },
   //异步获取食品分类列表
-  async actionGetCategory({commit}) {
+  async actionGetCategory ({commit}) {
     //发送异步ajax请求
     const result = await getFoodCategory()
     //根据结果通过mutation修改state的值
@@ -41,8 +47,7 @@ export default {
     }
   },
   //异步获取商家列表
-  async actionGetShops({commit, state}) {
-    console.log(state, 'lalallalalla')
+  async actionGetShops ({commit, state}) {
     //发送异步ajax请求
     const {longitude, latitude} = state
     const result = await getShopList(longitude, latitude)
@@ -54,12 +59,12 @@ export default {
   },
 
   // 同步记录用户信息
-  recordUser({commit}, userInfo) {
+  recordUser ({commit}, userInfo) {
     commit(RECEIVE_USER_INFO, {userInfo})
   },
 
   // 异步获取用户信息
-  async actionUserInfo({commit}) {
+  async actionUserInfo ({commit}) {
     const result = await getUserInfo()
     if (result.code === 0) {
       const userInfo = result.data
@@ -67,10 +72,35 @@ export default {
     }
   },
   // 异步登出
-  async actionLogout({commit}){
+  async actionLogout ({commit}) {
     const result = await getLogout()
     if (result.code === 0) {
       commit(REST_USER_INFO)
     }
-  }
+  },
+  //异步获取商家商品信息
+  async actionShopGoods ({commit}) {
+    const result = await getShopGoods()
+    console.log(result)
+    if (result.code === 0) {
+      const goods = result.data
+      commit(RECEIVE_GOODS, {goods})
+    }
+  },
+  //异步获取商家评价信息
+  async actionShopRatings ({commit}) {
+    const result = await getShopRatings()
+    if (result.code === 0) {
+      const ratings = result.data
+      commit(RECEIVE_RATINGS, {ratings})
+    }
+  },
+  //异步获取商家信息
+  async actionShopInfo ({commit}) {
+    const result = await getShopInfo()
+    if (result.code === 0) {
+      const info = result.data
+      commit(RECEIVE_INFO, {info})
+    }
+  },
 }
