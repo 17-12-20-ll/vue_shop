@@ -24,7 +24,6 @@
       ShopHeader
     },
     mounted () {
-      this.$store.dispatch('actionShopGoods')
       this.$store.dispatch('actionShopInfo')
     }
   }
